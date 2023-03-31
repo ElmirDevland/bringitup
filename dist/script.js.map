@@ -1,0 +1,1 @@
+{"version":3,"file":"script.js","mappings":";;;;;AAAAA,MAAM,CAACC,gBAAgB,CAAC,kBAAkB,EAAE,MAAM;EAChD,YAAY;AACd,CAAC,CAAC,C","sources":["webpack://bringitup/./src/js/main.js"],"sourcesContent":["window.addEventListener('DOMContentLoaded', () => {\r\n  'use strict';\r\n});\r\n"],"names":["window","addEventListener"],"sourceRoot":""}
