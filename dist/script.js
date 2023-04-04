@@ -2,6 +2,51 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/difference.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/difference.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class Difference {
+  constructor(parent, items) {
+    this.parent = document.querySelector(parent);
+    this.items = this.parent.querySelectorAll(items);
+    this.plusBtn = this.parent.querySelector('.plus');
+    this.counter = 0;
+  }
+  hideItems() {
+    this.items.forEach((item, i, arr) => {
+      if (i !== arr.length - 1) {
+        item.style.display = 'none';
+        item.classList.add('animated', 'slideInDown');
+      }
+    });
+  }
+  bindTriggers() {
+    this.plusBtn.addEventListener('click', () => {
+      if (this.counter >= this.items.length - 2) {
+        this.items[this.counter].style.display = 'flex';
+        this.items[this.items.length - 1].remove();
+      } else {
+        this.items[this.counter].style.display = 'flex';
+        this.counter++;
+      }
+    });
+  }
+  init() {
+    this.hideItems();
+    this.bindTriggers();
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Difference);
+
+/***/ }),
+
 /***/ "./src/js/modules/playVideo.js":
 /*!*************************************!*\
   !*** ./src/js/modules/playVideo.js ***!
@@ -296,6 +341,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider_mini_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider/mini-slider */ "./src/js/modules/slider/mini-slider.js");
 /* harmony import */ var _modules_slider_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slider/slider */ "./src/js/modules/slider/slider.js");
 /* harmony import */ var _modules_playVideo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/playVideo */ "./src/js/modules/playVideo.js");
+/* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
+
 
 
 
@@ -335,6 +382,13 @@ window.addEventListener('DOMContentLoaded', () => {
   //Player
   const videoPlayer = new _modules_playVideo__WEBPACK_IMPORTED_MODULE_3__["default"]('.showup .play', '.overlay');
   videoPlayer.init();
+
+  //Difference
+
+  const oldOfficer = new _modules_difference__WEBPACK_IMPORTED_MODULE_4__["default"]('.officerold', '.officer__card-item');
+  oldOfficer.init();
+  const newOfficer = new _modules_difference__WEBPACK_IMPORTED_MODULE_4__["default"]('.officernew', '.officer__card-item');
+  newOfficer.init();
 });
 })();
 
