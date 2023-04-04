@@ -7,3 +7,5 @@ Creating a video player in a modal window.
 Implementation of mini sliders.
 
 Implementation of the script for the appearance of tabs when clicking on the plus sign, in the block 'The Difference'.
+
+The script for sending data from the form. Validation of the email field and the mask for the phone number.
