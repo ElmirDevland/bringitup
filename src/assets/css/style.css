@@ -1800,3 +1800,29 @@ a:active {
 .flex {
    display: flex !important;
 }
+.status-modal {
+   background-color: rgba(0, 0, 0, 0.5);
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 1000;
+   display: flex;
+   justify-content: center;
+}
+.status-modal .text-window {
+   text-align: center;
+   font-size: 36px;
+   background-color: #2546bc;
+   color: #fff;
+   height: 155px;
+   width: 500px;
+   border-left: 25px white solid;
+   margin: 125px 0px 0px 0px;
+   font-weight: 900;
+   border-radius: 5px;
+}
+.text-window p {
+   margin: 50px 0px 0px 0px;
+}

@@ -2,7 +2,6 @@ class Difference {
   constructor(parent, items) {
     this.parent = document.querySelector(parent);
     this.items = this.parent.querySelectorAll(items);
-    this.plusBtn = this.parent.querySelector('.plus');
     this.counter = 0;
   }
   hideItems() {
@@ -14,7 +13,7 @@ class Difference {
     });
   }
   bindTriggers() {
-    this.plusBtn.addEventListener('click', () => {
+    this.parent.querySelector('.plus').addEventListener('click', () => {
       if (this.counter >= this.items.length - 2) {
         this.items[this.counter].style.display = 'flex';
         this.items[this.items.length - 1].remove();

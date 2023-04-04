@@ -16,7 +16,6 @@ class Difference {
   constructor(parent, items) {
     this.parent = document.querySelector(parent);
     this.items = this.parent.querySelectorAll(items);
-    this.plusBtn = this.parent.querySelector('.plus');
     this.counter = 0;
   }
   hideItems() {
@@ -28,7 +27,7 @@ class Difference {
     });
   }
   bindTriggers() {
-    this.plusBtn.addEventListener('click', () => {
+    this.parent.querySelector('.plus').addEventListener('click', () => {
       if (this.counter >= this.items.length - 2) {
         this.items[this.counter].style.display = 'flex';
         this.items[this.items.length - 1].remove();
@@ -44,6 +43,109 @@ class Difference {
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Difference);
+
+/***/ }),
+
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class Forms {
+  constructor(form) {
+    this.form = document.querySelector(form);
+    this.path = 'assets/question.php';
+    this.messages = {
+      fail: 'Oops...',
+      success: 'Success!'
+    };
+  }
+  checkMailInputs() {
+    const mailInput = this.form.querySelector('[name="email"]');
+    mailInput.addEventListener('input', () => {
+      mailInput.value = mailInput.value.replace(/[а-яё]/gi, '');
+    });
+  }
+  async postData(url, data) {
+    const res = await fetch(url, {
+      method: 'POST',
+      body: data
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to fetch ${url} ${res.status} (${res.statusText})`);
+    }
+    return await res.text();
+  }
+  initMask() {
+    function setCursorPosition(pos, elem) {
+      elem.setSelectionRange(pos, pos);
+      elem.focus();
+    }
+    function createMask(event) {
+      const matrix = '+1 (___) ___-____';
+      const def = matrix.replace(/\D/g, '');
+      let val = this.value.replace(/\D/g, '');
+      let i = 0;
+      if (def.length >= val.length) {
+        val = def;
+      }
+      this.value = matrix.replace(/./g, function (a) {
+        return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
+      });
+      if (event.type === 'blur') {
+        if (this.value.length == 2) {
+          this.value = '';
+        }
+      } else {
+        setCursorPosition(this.value.length, this);
+      }
+    }
+    const input = this.form.querySelector('[name="phone"]');
+    if (input) {
+      input.addEventListener('input', createMask);
+      input.addEventListener('focus', createMask);
+      input.addEventListener('blur', createMask);
+      input.addEventListener('keypress', createMask);
+    }
+  }
+  init() {
+    this.checkMailInputs();
+    this.initMask();
+    const statusModal = document.createElement('div');
+    statusModal.classList.add('status-modal');
+    this.form.addEventListener('submit', e => {
+      e.preventDefault();
+      const formData = new FormData(this.form);
+      document.body.prepend(statusModal);
+      this.postData(this.path, formData).then(data => {
+        statusModal.innerHTML = `
+         <div class="text-window">
+            <p>${this.messages.success}</p>
+         </div>
+         `;
+        console.log(data);
+      }).catch(e => {
+        statusModal.innerHTML = `
+         <div class="text-window">
+            <p>${this.messages.fail}</p>
+         </div>
+         `;
+        console.log(e.message);
+      }).finally(() => {
+        this.form.reset();
+        setTimeout(() => {
+          statusModal.remove();
+        }, 3500);
+      });
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Forms);
 
 /***/ }),
 
@@ -342,6 +444,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slider/slider */ "./src/js/modules/slider/slider.js");
 /* harmony import */ var _modules_playVideo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/playVideo */ "./src/js/modules/playVideo.js");
 /* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+
 
 
 
@@ -389,6 +493,12 @@ window.addEventListener('DOMContentLoaded', () => {
   oldOfficer.init();
   const newOfficer = new _modules_difference__WEBPACK_IMPORTED_MODULE_4__["default"]('.officernew', '.officer__card-item');
   newOfficer.init();
+
+  //Forms
+  const formOne = new _modules_forms__WEBPACK_IMPORTED_MODULE_5__["default"]('.join .form');
+  formOne.init();
+  const secondForm = new _modules_forms__WEBPACK_IMPORTED_MODULE_5__["default"]('.schedule .form');
+  secondForm.init();
 });
 })();
 

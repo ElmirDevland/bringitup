@@ -3,6 +3,7 @@ import MiniSlider from './modules/slider/mini-slider';
 import Slider from './modules/slider/slider';
 import VideoPlayer from './modules/playVideo';
 import Difference from './modules/difference';
+import Forms from './modules/forms';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -47,4 +48,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const newOfficer = new Difference('.officernew', '.officer__card-item');
   newOfficer.init();
+
+  //Forms
+  const formOne = new Forms('.join .form');
+  formOne.init();
+
+  const secondForm = new Forms('.schedule .form');
+  secondForm.init();
 });
