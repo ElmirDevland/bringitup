@@ -11,3 +11,5 @@ Implementation of the script for the appearance of tabs when clicking on the plu
 The script for sending data from the form. Validation of the email field and the mask for the phone number.
 
 Optimization.
+
+Optimization and expansion of the player. Implementation of the functionality for checking video viewing, and activating the next video.
