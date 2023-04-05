@@ -8,10 +8,22 @@ import Forms from './modules/forms';
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
-  //Slider
-  const mainSlider = new MainSlider({ container: '.page', btns: '.next' });
+  //Main Slides
+  const mainSlider = new MainSlider({
+    container: '.page',
+    btns: '.page .sidecontrol__controls .next',
+  });
   mainSlider.render();
 
+  const moduleAppSlider = new MainSlider({
+    container: '.moduleapp',
+    btns: '.moduleapp .sidecontrol__controls .next',
+    nextModule: '.moduleapp .nextmodule',
+    prevModule: '.moduleapp .prevmodule',
+  });
+  moduleAppSlider.render();
+
+  // Mini Slides
   const showUpSlider = new MiniSlider({
     container: '.showup__content-slider',
     prev: '.showup__prev',

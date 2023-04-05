@@ -5,7 +5,11 @@ class MiniSlider extends Slider {
     this.buttons = this.findBtn();
   }
   findBtn() {
-    return Array.from(this.slides).filter((item) => item.tagName === 'BUTTON');
+    try {
+      return Array.from(this.slides).filter(
+        (item) => item.tagName === 'BUTTON'
+      );
+    } catch (e) {}
   }
   addActive() {
     Array.from(this.slides).forEach((slide) => {
@@ -40,19 +44,21 @@ class MiniSlider extends Slider {
   }
 
   init() {
-    this.container.style.cssText = `
-    overflow: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    `;
+    try {
+      this.container.style.cssText = `
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      `;
 
-    if (this.autoplay) {
-      setInterval(() => {
-        this.nextSlide();
-      }, 5000);
-    }
-    this.bindTriggers();
+      if (this.autoplay) {
+        setInterval(() => {
+          this.nextSlide();
+        }, 5000);
+      }
+      this.bindTriggers();
+    } catch (e) {}
   }
 }
 export default MiniSlider;

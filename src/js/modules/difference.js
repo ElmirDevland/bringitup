@@ -1,8 +1,10 @@
 class Difference {
   constructor(parent, items) {
-    this.parent = document.querySelector(parent);
-    this.items = this.parent.querySelectorAll(items);
-    this.counter = 0;
+    try {
+      this.parent = document.querySelector(parent);
+      this.items = this.parent.querySelectorAll(items);
+      this.counter = 0;
+    } catch (e) {}
   }
   hideItems() {
     this.items.forEach((item, i, arr) => {
@@ -24,8 +26,10 @@ class Difference {
     });
   }
   init() {
-    this.hideItems();
-    this.bindTriggers();
+    try {
+      this.hideItems();
+      this.bindTriggers();
+    } catch (e) {}
   }
 }
 export default Difference;

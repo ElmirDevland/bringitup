@@ -67,41 +67,43 @@ class Forms {
     }
   }
   init() {
-    this.checkMailInputs();
-    this.initMask();
+    try {
+      this.checkMailInputs();
+      this.initMask();
 
-    const statusModal = document.createElement('div');
-    statusModal.classList.add('status-modal');
+      const statusModal = document.createElement('div');
+      statusModal.classList.add('status-modal');
 
-    this.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(this.form);
-      document.body.prepend(statusModal);
+      this.form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(this.form);
+        document.body.prepend(statusModal);
 
-      this.postData(this.path, formData)
-        .then((data) => {
-          statusModal.innerHTML = `
-         <div class="text-window">
-            <p>${this.messages.success}</p>
-         </div>
-         `;
-          console.log(data);
-        })
-        .catch((e) => {
-          statusModal.innerHTML = `
-         <div class="text-window">
-            <p>${this.messages.fail}</p>
-         </div>
-         `;
-          console.log(e.message);
-        })
-        .finally(() => {
-          this.form.reset();
-          setTimeout(() => {
-            statusModal.remove();
-          }, 3500);
-        });
-    });
+        this.postData(this.path, formData)
+          .then((data) => {
+            statusModal.innerHTML = `
+           <div class="text-window">
+              <p>${this.messages.success}</p>
+           </div>
+           `;
+            console.log(data);
+          })
+          .catch((e) => {
+            statusModal.innerHTML = `
+           <div class="text-window">
+              <p>${this.messages.fail}</p>
+           </div>
+           `;
+            console.log(e.message);
+          })
+          .finally(() => {
+            this.form.reset();
+            setTimeout(() => {
+              statusModal.remove();
+            }, 3500);
+          });
+      });
+    } catch (e) {}
   }
 }
 export default Forms;
