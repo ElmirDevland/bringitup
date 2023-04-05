@@ -13,3 +13,5 @@ The script for sending data from the form. Validation of the email field and the
 Optimization.
 
 Optimization and expansion of the player. Implementation of the functionality for checking video viewing, and activating the next video.
+
+Uploading files and deploying content. Project compression.
