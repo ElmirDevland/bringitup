@@ -4,6 +4,8 @@ import Slider from './modules/slider/slider';
 import VideoPlayer from './modules/playVideo';
 import Difference from './modules/difference';
 import Forms from './modules/forms';
+import ShowInfo from './modules/showInfo';
+import Download from './modules/download';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -55,16 +57,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
   //Difference
 
-  const oldOfficer = new Difference('.officerold', '.officer__card-item');
-  oldOfficer.init();
-
-  const newOfficer = new Difference('.officernew', '.officer__card-item');
-  newOfficer.init();
+  new Difference('.officerold', '.officer__card-item').init();
+  new Difference('.officernew', '.officer__card-item').init();
 
   //Forms
-  const formOne = new Forms('.join .form');
-  formOne.init();
 
-  const secondForm = new Forms('.schedule .form');
-  secondForm.init();
+  new Forms('.join .form').init();
+  new Forms('.schedule .form').init();
+
+  // Info
+  new ShowInfo('.module__info-show .plus').init();
+
+  //Download
+  new Download('.download').init();
 });
