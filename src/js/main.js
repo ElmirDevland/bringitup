@@ -50,8 +50,8 @@ window.addEventListener('DOMContentLoaded', () => {
   feedSlider.init();
 
   //Player
-  const videoPlayer = new VideoPlayer('.showup .play', '.overlay');
-  videoPlayer.init();
+  new VideoPlayer('.showup .play', '.overlay').init();
+  new VideoPlayer('.module__video-item .play', '.overlay').init();
 
   //Difference
 
